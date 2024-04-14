@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import { Inter as FontSans } from "next/font/google"
 
-const inter = Inter({ subsets: ["latin"] });
+import { cn } from "@/lib/utils"
+import Link from "next/link";
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +23,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}
+      >
+        <nav className="h-14 bg-slate-300 shadow-lg drop-shadow-lg">
+          <div className="h-full flex items-center max-w-maxContent mx-auto">
+
+            <Link href={'/'} className="flex items-center gap-x-2 font-semibold text-xl">
+              <img className="w-[50px] aspect-square" src="https://i.pinimg.com/originals/77/0b/80/770b805d5c99c7931366c2e84e88f251.png" alt="logo.png" />
+              <p>Weather App</p>
+            </Link>
+          </div>
+        </nav>
+        {children}
+      </body>
     </html>
   );
 }
